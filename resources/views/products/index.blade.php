@@ -8,14 +8,30 @@
 
 
 <div class="card">
-    <form action="" method="get" class="card-header">
+    <form action="/filter" method="GET" class="card-header">
         <div class="form-row justify-content-between">
             <div class="col-md-2">
-                <input type="text" name="title" placeholder="Product Title" class="form-control">
+                <input type="text" value="{{ request()->input('title', old('title')) }}" name="title" placeholder="Product Title" class="form-control">
             </div>
             <div class="col-md-2">
-                <select name="variant" id="" class="form-control">
 
+                <select name="variant" id="" class="form-control">
+                    {{-- {{dd($item->variant_id)}} --}}
+                    <option value="" >--- Select A Variant ---</option>
+                    @foreach($productVariants as $item)
+
+                    <optgroup label="{{$item->variants->title}}" >
+                        <option value="{{$item->variant}}"> {{  $item->variant }}</option>
+                    </optgroup>
+
+                    @endforeach
+                    {{-- @foreach ($variants as $type)
+                        <optgroup label="{{$type->title}}">
+                            @foreach ($productVariants as $product)
+                            <option value="{{$product->variant_id}}">{{$product->variant}}</option>
+                            @endforeach
+                        </optgroup>
+                    @endforeach --}}
                 </select>
             </div>
 

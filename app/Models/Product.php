@@ -11,6 +11,7 @@ class Product extends Model
         'title', 'sku', 'description'
     ];
 
+
     public function getCreatedAtAttribute($value)
     {
         return Carbon::parse($value)->format('d-F-Y');
@@ -23,6 +24,6 @@ class Product extends Model
 
     public function product_variant_prices()
     {
-        return $this->hasMany(ProductVariantPrice::class);
+        return $this->hasMany(ProductVariantPrice::class, 'product_id', 'id');
     }
 }
